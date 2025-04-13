@@ -54,3 +54,6 @@ dkms.conf
 # Binary files
 ex*
 !ex*.c
+!ex*.h
+!/ex19
+!/ex20

@@ -60,3 +60,6 @@ ex*
 !/ex22
 !/ex23
 !/ex24
+
+# Database files
+*.dat

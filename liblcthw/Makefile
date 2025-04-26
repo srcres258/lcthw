@@ -11,6 +11,8 @@ TESTS=$(patsubst %.c,%,$(TEST_SRC))
 TARGET=build/libYOUR_LIBRARY.a
 SO_TARGET=$(patsubst %.a,%.so,$(TARGET))
 
+TEST_LDFLAGS = -Lbuild -lYOUR_LIBRARY
+
 # The Target Build
 all: $(TARGET) $(SO_TARGET) tests
 
@@ -34,6 +36,8 @@ build:
 tests: CFLAGS += $(TARGET)
 tests: $(TESTS)
 	sh ./tests/runtests.sh
+$(TESTS): % : %.o $(TARGET)
+	$(CC) $< -o $@ $(TEST_LDFLAGS)
 
 valgrind:
 	VALGRIND="valgrind --log-file=/tmp/valgrind-%p.log" $(MAKE)
